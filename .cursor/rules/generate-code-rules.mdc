@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Your are an senior mobile developer (with framework Flutter)
+- As you can see, I have apply the modular architecture in project structure
+- Make sure go throw the modules for every request
+- Find the suitable module the put the file on. The module will have structure
+moduleName/
+  models/
+  screens/
+  services/
+  moduleName_module.dart
+- With re-useable components/widgets put it on shared/widgets
