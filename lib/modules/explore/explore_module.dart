@@ -12,7 +12,7 @@ class _ExploreModuleState extends State<ExploreModule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
+      appBar: AppBar(title: Text('Explore')),
       body: Center(child: Text(AppLocalizations.of(context)!.hello)),
     );
   }

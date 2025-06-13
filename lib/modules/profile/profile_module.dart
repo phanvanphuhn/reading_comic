@@ -12,7 +12,7 @@ class _ProfileModuleState extends State<ProfileModule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
+      appBar: AppBar(title: Text('Profile')),
       body: Center(child: Text(AppLocalizations.of(context)!.hello)),
     );
   }
