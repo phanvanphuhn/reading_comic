@@ -3,6 +3,7 @@ import 'package:booking_app/modules/explore/explore_module.dart';
 import 'package:booking_app/modules/home/home_module.dart';
 import 'package:booking_app/modules/profile/profile_module.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      // locale: const Locale('vi', 'VN'), set language
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -36,9 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
   // Replace these with your actual screens from each module
   static final List<Widget> _screens = <Widget>[
     Center(child: HomeModule()), // e.g., HomeScreen()
-    Center(child: ExploreModule.explore()), // e.g., ExploreScreen()
-    Center(child: ArchiveModule.archive()), // e.g., ArchiveScreen()
-    Center(child: ProfileModule.profile()), // e.g., ProfileScreen()
+    Center(child: ExploreModule()),
+    Center(child: ArchiveModule()),
+    Center(child: ProfileModule()),
   ];
 
   void _onItemTapped(int index) {
