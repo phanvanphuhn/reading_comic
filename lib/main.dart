@@ -3,18 +3,39 @@ import 'package:booking_app/modules/explore/explore_module.dart';
 import 'package:booking_app/modules/home/home_module.dart';
 import 'package:booking_app/modules/profile/profile_module.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:booking_app/shared/utils/locale_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MainApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
+  const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MyApp();
+  }
+}
+
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeProvider);
     return MaterialApp(
-      title: 'Flutter Demo',
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: locale,
+      title: 'Booking App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
@@ -33,14 +54,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
-  // Replace these with your actual screens from each module
-  static final List<Widget> _screens = <Widget>[
-    Center(child: HomeModule.home()), // e.g., HomeScreen()
-    Center(child: ExploreModule.explore()), // e.g., ExploreScreen()
-    Center(child: ArchiveModule.archive()), // e.g., ArchiveScreen()
-    Center(child: ProfileModule.profile()), // e.g., ProfileScreen()
-  ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -49,8 +62,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> screens = <Widget>[
+      Center(child: HomeModule()),
+      Center(child: ExploreModule()),
+      Center(child: ArchiveModule()),
+      Center(child: ProfileModule()),
+    ];
+
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.red,
         currentIndex: _selectedIndex,
