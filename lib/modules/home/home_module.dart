@@ -1,38 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:booking_app/shared/utils/locale_provider.dart';
 
-class HomeModule extends StatefulWidget {
-  final ValueChanged<Locale> onLocaleChanged;
-  const HomeModule({super.key, required this.onLocaleChanged});
-
-  @override
-  State<HomeModule> createState() => _HomeModuleState();
-}
-
-class _HomeModuleState extends State<HomeModule> {
-  void _toggleLocale() {
-    final current = Localizations.localeOf(context);
-    if (current.languageCode == 'en') {
-      widget.onLocaleChanged(const Locale('vi', 'VN'));
-    } else {
-      widget.onLocaleChanged(const Locale('en', 'US'));
-    }
-  }
+class HomeModule extends ConsumerWidget {
+  const HomeModule({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeProvider);
     return Scaffold(
       appBar: AppBar(
         actionsPadding: const EdgeInsets.symmetric(horizontal: 16),
         actions: [
           InkWell(
-            onTap: _toggleLocale,
+            onTap: () => toggleLocale(ref),
             child: Row(
               children: [
                 const Icon(Icons.language, size: 24),
-                Text(
-                  Localizations.localeOf(context).languageCode.toUpperCase(),
-                ),
+                Text(locale.languageCode.toUpperCase()),
               ],
             ),
           ),

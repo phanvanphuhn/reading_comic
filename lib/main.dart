@@ -4,9 +4,11 @@ import 'package:booking_app/modules/home/home_module.dart';
 import 'package:booking_app/modules/profile/profile_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:booking_app/shared/utils/locale_provider.dart';
 
 void main() {
-  runApp(MainApp());
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends StatefulWidget {
@@ -17,44 +19,33 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  Locale _locale = const Locale('en', 'US');
-
-  void _switchLocale(Locale locale) {
-    setState(() {
-      _locale = locale;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MyApp(locale: _locale, onLocaleChanged: _switchLocale);
+    return MyApp();
   }
 }
 
-class MyApp extends StatelessWidget {
-  final Locale? locale;
-  final ValueChanged<Locale> onLocaleChanged;
-
-  const MyApp({super.key, required this.locale, required this.onLocaleChanged});
+class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeProvider);
     return MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: locale,
-      title: 'Flutter Demo',
+      title: 'Booking App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: MyHomePage(onLocaleChanged: onLocaleChanged),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  final ValueChanged<Locale> onLocaleChanged;
-  const MyHomePage({super.key, required this.onLocaleChanged});
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -63,10 +54,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = <Widget>[
-      Center(child: HomeModule(onLocaleChanged: widget.onLocaleChanged)),
+      Center(child: HomeModule()),
       Center(child: ExploreModule()),
       Center(child: ArchiveModule()),
       Center(child: ProfileModule()),
@@ -90,11 +87,5 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 }
