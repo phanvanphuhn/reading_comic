@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // Replace these with your actual screens from each module
   static final List<Widget> _screens = <Widget>[
-    Center(child: HomeModule.home()), // e.g., HomeScreen()
+    Center(child: HomeModule()), // e.g., HomeScreen()
     Center(child: ExploreModule.explore()), // e.g., ExploreScreen()
     Center(child: ArchiveModule.archive()), // e.g., ArchiveScreen()
     Center(child: ProfileModule.profile()), // e.g., ProfileScreen()
