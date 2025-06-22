@@ -1,3 +1,7 @@
 {
-  "hello":"Xin chào"
+  "hello": "Xin chào",
+  "bottomNavHome": "Trang chủ",
+  "bottomNavExplore": "Khám phá",
+  "bottomNavArchive": "Lưu trữ",
+  "bottomNavProfile": "Cá nhân"
 }

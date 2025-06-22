@@ -1,3 +1,7 @@
 {
-  "hello": "Hello"
+  "hello": "Hello",
+  "bottomNavHome": "Home",
+  "bottomNavExplore": "Explore",
+  "bottomNavArchive": "Archive",
+  "bottomNavProfile": "Profile"
 }
