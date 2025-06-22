@@ -35,7 +35,7 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: locale,
-      title: 'Booking App',
+      title: 'Reading Comic',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
@@ -79,11 +79,23 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedFontSize: 16,
         unselectedFontSize: 14,
         onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
-          BottomNavigationBarItem(icon: Icon(Icons.archive), label: 'Archive'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: AppLocalizations.of(context)!.bottomNavHome,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.explore),
+            label: AppLocalizations.of(context)!.bottomNavExplore,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.archive),
+            label: AppLocalizations.of(context)!.bottomNavArchive,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: AppLocalizations.of(context)!.bottomNavProfile,
+          ),
         ],
       ),
     );
